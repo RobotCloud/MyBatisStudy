@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/ATM/src/main/java/com/robot/dao/UserMapper.xml" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/mybatis-01/src/main/java/com/robot/dao/UserMapper.xml" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/mybatis-02/src/main/resources/com/robot/dao/StudentMapper.xml" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/mybatis-02/src/main/resources/com/robot/dao/TeacherMapper.xml" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/mybatis-03/src/main/java/com/robot/dao/UserMapper.xml" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/mybatis-DSQL/src/main/java/com/robot/dao/BlogMapper.xml" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/mybatis-cache/src/main/java/com/robot/dao/UserMapper.xml" dialect="GenericSQL" />
+  </component>
+</project>

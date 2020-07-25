@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.robot.mapper.BlogMapper">
+
+<!--    插入数据-->
+    <insert id="addBlog" parameterType="blog">
+        insert into blog (id, title, author, create_time, views) values (#{id},#{title},#{author},#{createTime},#{views})
+    </insert>
+
+<!--    如果不指定，则查询所有，如果指定参数，则按条件查询-->
+    <select id="queryBlog" parameterType="map" resultType="blog">
+        select * from blog where 1=1
+        <if test="title != null">
+            and title=#{title}
+        </if>
+        <if test="author != null">
+            and author=#{author}
+        </if>
+    </select>
+
+<!--    where语句+if, 防止where后直接拼接and-->
+    <select id="queryBlog2" parameterType="map" resultType="blog">
+        select * from blog
+        <where>
+            <if test="title != null">
+                title=#{title}
+            </if>
+            <if test="author != null">
+                and author=#{author}
+            </if>
+        </where>
+    </select>
+
+<!--    choose-when-otherwise 相当于 Switch-case-default 语句,只会按顺序选择其中一个执行-->
+    <select id="queryBlog3" parameterType="map" resultType="blog">
+        select * from blog
+        <where>
+            <choose>
+                <when test="title != null">
+                    title = #{title}
+                </when>
+                <when test="author != null">
+                    and author = #{author}
+                </when>
+                <otherwise>
+                    and views=#{views}
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+<!--    SQL片段，代码复用，相当于封装成一个方法-->
+    <sql id="if-blog">
+        <if test="title != null">
+            title = #{title},
+        </if>
+        <if test="author != null">
+            author = #{author}
+        </if>
+    </sql>
+
+<!--    set标签：动态前置set，删掉无关逗号-->
+    <update id="updateBlog" parameterType="map">
+        update blog
+        <set>
+            <include refid="if-blog"></include>
+        </set>
+        where id = #{id}
+    </update>
+
+<!--    遍历查询 select * from blog where (id=? or id=? or id=?)-->
+    <select id="queryBlogForeach" parameterType="map" resultType="blog">
+        select * from blog
+        <where>
+            <foreach collection="ids" item="id" open="(" separator="or" close=")">
+                id = #{id}
+            </foreach>
+        </where>
+    </select>
+
+</mapper>

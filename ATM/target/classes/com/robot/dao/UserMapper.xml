@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.robot.dao.UserMapper">
+
+    <select id="getUserList" resultType="com.robot.pojo.User">
+        select * from bank.user
+    </select>
+
+    <update id="save" parameterType="User">
+        update bank.user set balance=#{balance} where cardNo=#{cardNo}
+    </update>
+
+    <select id="selectUser" resultType="User" parameterType="map" >
+        select `identity`, username, phone, cardNo, password, balance from bank.user where cardNo=#{cardNo} and password=#{password};
+    </select>
+
+    <select id="getUserByCardNo" resultType="User">
+        select `identity`, username, phone, cardNo, password, balance from bank.user where cardNo=#{cardNo};
+    </select>
+
+    <update id="modifyPassword" parameterType="map">
+        update bank.user set password=#{password} where cardNo=#{cardNo};
+    </update>
+
+
+<!--&lt;!&ndash;    add user&ndash;&gt;-->
+<!--    <insert id="addUser" parameterType="com.robot.pojo.User">-->
+<!--        insert into mybatis.user (id, name, pwd) values (#{id}, #{name}, #{pwd})-->
+<!--    </insert>-->
+
+
+<!--&lt;!&ndash;    delete user&ndash;&gt;-->
+<!--    <delete id="deleteUser" parameterType="int">-->
+<!--        delete from mybatis.user where id = #{id}-->
+<!--    </delete>-->
+</mapper>
