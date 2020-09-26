@@ -105,4 +105,16 @@ public class MyTest {
         mapper.queryBlogForeach(map);
         sqlSession.close();
     }
+
+    @Test
+    public void deleteTest() {
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        BlogMapper mapper = sqlSession.getMapper(BlogMapper.class);
+        HashMap map = new HashMap();
+        ArrayList<String> ids = new ArrayList();
+        ids.add("6d6cb532858b4fb1b0204ce5b8601c9f");
+        map.put("ids", ids);
+        mapper.queryBlogForeach(map);
+        sqlSession.close();
+    }
 }

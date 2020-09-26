@@ -12,7 +12,7 @@
 <!--    如果不指定，则查询所有，如果指定参数，则按条件查询-->
     <select id="queryBlog" parameterType="map" resultType="blog">
         select * from blog where 1=1
-        <if test="title != null">
+        <if test="ttle != null">
             and title=#{title}
         </if>
         <if test="author != null">
@@ -79,5 +79,14 @@
             </foreach>
         </where>
     </select>
+
+    <delete id="delete" parameterType="map">
+        delete from blog
+        <where>
+            <foreach collection="ids" item="id" open="(" separator="or" close=")">
+                id = #{id}
+            </foreach>
+        </where>
+    </delete>
 
 </mapper>

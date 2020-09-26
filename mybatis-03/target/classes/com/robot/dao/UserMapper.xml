@@ -7,7 +7,7 @@
 
     <resultMap id="UserMap" type="User">
 <!--        column : Database ; property: User-->
-        <result column="id" property="id"/>
+        <id column="id" property="id"/>
         <result column="name" property="name"/>
         <result column="pwd" property="password"/>
     </resultMap>

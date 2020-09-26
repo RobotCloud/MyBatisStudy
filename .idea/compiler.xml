@@ -11,6 +11,7 @@
         <module name="mybatis-02" />
         <module name="mybatis-01" />
         <module name="mybatis-DSQL" />
+        <module name="mybatis-demo" />
         <module name="ATM" />
         <module name="mybatis-cache" />
       </profile>

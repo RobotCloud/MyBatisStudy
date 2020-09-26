@@ -35,10 +35,12 @@ public class UserDaoTest {
     public void addUserTest() {
         SqlSession sqlSession = MybatisUtils.getSqlSession();
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-        int res = userMapper.addUser(new User(4, "baby2", "123456"));
+        User user = new User(null, "baby2", "123456");
+        int res = userMapper.addUser(user);
         System.out.println(res);
         // 提交事务
         sqlSession.commit();
+        System.out.println("id: " + user.getId());
         sqlSession.close();
     }
 

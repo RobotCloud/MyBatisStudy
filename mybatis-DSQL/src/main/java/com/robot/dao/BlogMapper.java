@@ -18,4 +18,7 @@ public interface BlogMapper {
     int updateBlog(Map map);
 
     List<Blog> queryBlogForeach(Map map);
+
+    // 批量删除
+    int delete(Map map);
 }

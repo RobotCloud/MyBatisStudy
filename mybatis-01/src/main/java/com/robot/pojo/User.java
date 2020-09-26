@@ -4,24 +4,24 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("myUser")
 public class User {
-    private int id;
+    private Integer id;
     private String name;
     private String pwd;
 
     public User() {
     }
 
-    public User(int id, String name, String pwd) {
+    public User(Integer id, String name, String pwd) {
         this.id = id;
         this.name = name;
         this.pwd = pwd;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

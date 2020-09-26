@@ -16,6 +16,9 @@
 
 <!--    add user-->
     <insert id="addUser" parameterType="com.robot.pojo.User">
+        <selectKey keyProperty="id" resultType="int">
+            select LAST_INSERT_ID()
+        </selectKey>
         insert into mybatis.user (id, name, pwd) values (#{id}, #{name}, #{pwd})
     </insert>
 

@@ -3,15 +3,13 @@ package com.robot.pojo;
 public class Student {
     private int id;
     private String name;
-    private int tid;
 
     public Student() {
     }
 
-    public Student(int id, String name, int tid) {
+    public Student(int id, String name) {
         this.id = id;
         this.name = name;
-        this.tid = tid;
     }
 
     public int getId() {
@@ -30,20 +28,11 @@ public class Student {
         this.name = name;
     }
 
-    public int getTid() {
-        return tid;
-    }
-
-    public void setTid(int tid) {
-        this.tid = tid;
-    }
-
     @Override
     public String toString() {
         return "Student{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", tid=" + tid +
                 '}';
     }
 }

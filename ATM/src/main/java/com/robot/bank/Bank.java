@@ -1,5 +1,6 @@
 package com.robot.bank;
 
+import com.robot.check.CheckInputFormat;
 import com.robot.dao.UserMapper;
 import com.robot.pojo.User;
 import com.robot.utils.MybatisUtils;
@@ -30,6 +31,9 @@ public class Bank {
      * 登录状态
      */
     private boolean status = false;
+
+    CheckInputFormat check = new CheckInputFormat();
+
 
     public Bank() {
     }
@@ -66,16 +70,27 @@ public class Bank {
      * 登录主界面
      */
     public void showMenu() {
-        User user;
+        User user = null;
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("----------【登录界面】----------");
             System.out.println("---------请输入银行卡号---------");
             String cardNo = scanner.next();
-            System.out.println("----------请输入密码-----------");
-            String password = scanner.next();
+            if (check.checkCardNoFormat(cardNo)) {
+                System.out.println("----------请输入密码-----------");
+                String password = scanner.next();
+                if (check.checkPasswordFormat(password)) {
+                    System.out.println("登录中......");
+                    user = login(cardNo, password);
+                } else {
+                    System.out.println("密码格式输入错误");
+                    continue;
+                }
+            } else {
+                System.out.println("银行卡号格式输入错误");
+                continue;
+            }
 
-            user = login(cardNo, password);
             if (user != null) {
                 System.out.println("-----------登录成功！----------");
                 System.out.println("-----尊敬的 " + user.getUsername() + "用户，欢迎您！----");
@@ -104,24 +119,37 @@ public class Bank {
                 case 1:
                     System.out.println("输入存款的金额");
                     double saveMoney = scanner.nextDouble();
-                    if (save(user, saveMoney)) {
-                        System.out.println("存款成功");
+                    if (check.checkMoneyFormat(saveMoney)) {
+                        if (save(user, saveMoney)) {
+                            System.out.println("存款成功");
+                        } else {
+                            System.out.println("存款失败");
+                        }
                     } else {
-                        System.out.println("存款失败");
+                        System.out.println("金额输入错误！");
                     }
                     break;
                 case 2:
                     System.out.println("输入取款的金额");
                     double takeMoney = scanner.nextDouble();
-                    if (withDraw(user, takeMoney)) {
-                        System.out.println("取款成功");
+                    if (check.checkMoneyFormat(takeMoney)) {
+                        if (withDraw(user, takeMoney)) {
+                            System.out.println("取款成功");
+                        } else {
+                            System.out.println("取款失败，余额不足！");
+                        }
                     } else {
-                        System.out.println("取款失败，余额不足！");
+                        System.out.println("金额输入错误！");
                     }
+
                     break;
                 case 3:
                     System.out.println("输入转账对方的银行卡号");
                     String yourCardNo = scanner.next();
+                    if (!check.checkCardNoFormat(yourCardNo)) {
+                        System.out.println("银行卡号格式错误！");
+                        break;
+                    }
                     User userTarget = getUserByCardNo(yourCardNo);
                     if (userTarget != null) {
                         System.out.println("请输入转账金额");
